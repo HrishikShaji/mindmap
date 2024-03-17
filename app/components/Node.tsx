@@ -1,11 +1,12 @@
 import React, { memo } from "react";
-import { Handle, Position } from "reactflow";
+import { Handle, Position, useNodeId, useNodes } from "reactflow";
 
 interface NodeProps {
 	data: Record<string, any>;
 }
 
 function CustomNode({ data }: NodeProps) {
+	const node = useNodeId();
 	return (
 		<div className="w-[200px] bg-white flex p-1 shadow-md rounded-md  border-2 border-stone-400">
 			<div className="flex gap-4">

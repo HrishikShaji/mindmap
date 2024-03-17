@@ -1,18 +1,12 @@
 "use client";
 import React, { FormEvent, useState } from "react";
-import ReactFlow, {
-	Edge,
-	Node,
-	NodeTypes,
-	useEdgesState,
-	useNodesState,
-} from "reactflow";
+import ReactFlow, { NodeTypes } from "reactflow";
 import CustomNode from "./Node";
 
 import "reactflow/dist/style.css";
 import StartNode from "./StartNode";
 import EndNode from "./EndNode";
-import { data, edges, nodePositions } from "./data";
+import { useNodeEdgeContext } from "../context/NodeEdgeContext";
 
 const nodeTypes: NodeTypes = {
 	custom: CustomNode,
@@ -20,27 +14,9 @@ const nodeTypes: NodeTypes = {
 	end: EndNode,
 };
 
-function coordinates({ id }: { id: string }) {
-	const newId = parseInt(id);
-	return { x: nodePositions[newId].x, y: nodePositions[newId].y };
-}
-
-function getNodes({ nodes }: { nodes: any[] }) {
-	return nodes.map((node) => {
-		return {
-			id: node.id,
-			type: node.type,
-			position: coordinates({ id: node.id }),
-			data: { label: node.label, id: node.id },
-		};
-	});
-}
-
-const initialNodes: Node[] = getNodes({ nodes: data });
-const initialEdges: Edge[] = edges;
 export const MindMap = () => {
-	const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-	const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+	const { setNodes, setEdges, onNodesChange, onEdgesChange, nodes, edges } =
+		useNodeEdgeContext();
 	const [label, setLabel] = useState("");
 	const [id, setId] = useState("");
 
@@ -102,7 +78,7 @@ export const MindMap = () => {
 						className="bg-white text-black py-1 px-3 rounded-md"
 						type="submit"
 					>
-						Add
+						Delete
 					</button>
 				</form>
 			</div>
