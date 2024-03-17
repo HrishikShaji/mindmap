@@ -1,190 +1,187 @@
 import React from "react";
-import ReactFlow, { Edge, Node, Position } from "reactflow";
+import ReactFlow, { Edge, Node, NodeTypes, Position } from "reactflow";
+import CustomNode from "./Node";
 
 import "reactflow/dist/style.css";
+import StartNode from "./StartNode";
+import EndNode from "./EndNode";
+
+const nodeTypes: NodeTypes = {
+  custom: CustomNode,
+  start: StartNode,
+  end: EndNode,
+};
+
+const nodePositions = [
+  { x: 20, y: 350 },
+  { x: 200, y: 150 },
+  { x: 200, y: 250 },
+  { x: 200, y: 350 },
+  { x: 200, y: 450 },
+  { x: 200, y: 550 },
+  { x: 500, y: 170 },
+  { x: 500, y: 120 },
+  { x: 500, y: 270 },
+  { x: 500, y: 220 },
+  { x: 500, y: 370 },
+  { x: 500, y: 320 },
+  { x: 500, y: 470 },
+  { x: 500, y: 420 },
+  { x: 500, y: 570 },
+  { x: 500, y: 520 },
+  { x: 800, y: 140 },
+  { x: 800, y: 90 },
+  { x: 1100, y: 25 },
+  { x: 1100, y: 75 },
+  { x: 1100, y: 125 },
+  { x: 1100, y: 175 },
+  { x: 1400, y: 100 },
+];
+
+function coordinates({ id }: { id: string }) {
+  const newId = parseInt(id) - 1;
+  return { x: nodePositions[newId].x, y: nodePositions[newId].y };
+}
 
 const initialNodes: Node[] = [
   {
     id: "1",
-    type: "input",
-    position: { x: 0, y: 350 },
+    type: "start",
+    position: coordinates({ id: "1" }),
     data: { label: "1" },
     sourcePosition: Position.Right,
   },
   {
     id: "2",
-    type: "selector",
-    position: { x: 200, y: 150 },
+    type: "custom",
+    position: coordinates({ id: "2" }),
     data: { label: "2" },
-    targetPosition: Position.Left,
-    sourcePosition: Position.Right,
   },
   {
     id: "3",
-    position: { x: 200, y: 250 },
+    position: coordinates({ id: "3" }),
     data: { label: "3" },
-    type: "selector",
-    targetPosition: Position.Left,
-    sourcePosition: Position.Right,
+    type: "custom",
   },
   {
     id: "4",
-    type: "selector",
-    position: { x: 200, y: 350 },
+    type: "custom",
+    position: coordinates({ id: "4" }),
     data: { label: "2" },
-    targetPosition: Position.Left,
-    sourcePosition: Position.Right,
   },
   {
     id: "5",
-    position: { x: 200, y: 450 },
+    position: coordinates({ id: "5" }),
     data: { label: "3" },
-    type: "selector",
-    targetPosition: Position.Left,
-    sourcePosition: Position.Right,
+    type: "custom",
   },
   {
     id: "6",
-    position: { x: 200, y: 550 },
+    position: coordinates({ id: "6" }),
     data: { label: "3" },
-    type: "selector",
-    targetPosition: Position.Left,
-    sourcePosition: Position.Right,
+    type: "custom",
   },
   {
     id: "7",
-    position: { x: 500, y: 170 },
+    position: coordinates({ id: "7" }),
     data: { label: "susu" },
-    type: "selector",
-    targetPosition: Position.Left,
-    sourcePosition: Position.Right,
+    type: "custom",
   },
   {
     id: "8",
     position: { x: 500, y: 120 },
     data: { label: "tutu" },
-    type: "selector",
-    targetPosition: Position.Left,
-    sourcePosition: Position.Right,
+    type: "custom",
   },
   {
     id: "9",
     position: { x: 500, y: 270 },
     data: { label: "huhu" },
-    type: "selector",
-    targetPosition: Position.Left,
-    sourcePosition: Position.Right,
+    type: "custom",
   },
   {
     id: "10",
     position: { x: 500, y: 220 },
     data: { label: "3" },
-    type: "selector",
-    targetPosition: Position.Left,
-    sourcePosition: Position.Right,
+    type: "custom",
   },
   {
     id: "11",
     position: { x: 500, y: 370 },
     data: { label: "3" },
-    type: "selector",
-    targetPosition: Position.Left,
-    sourcePosition: Position.Right,
+    type: "custom",
   },
   {
     id: "12",
     position: { x: 500, y: 320 },
     data: { label: "lolo" },
-    type: "selector",
-    targetPosition: Position.Left,
-    sourcePosition: Position.Right,
+    type: "custom",
   },
   {
     id: "13",
     position: { x: 500, y: 470 },
     data: { label: "3" },
-    type: "selector",
-    targetPosition: Position.Left,
-    sourcePosition: Position.Right,
+    type: "custom",
   },
   {
     id: "14",
     position: { x: 500, y: 420 },
     data: { label: "3" },
-    type: "selector",
-    targetPosition: Position.Left,
-    sourcePosition: Position.Right,
+    type: "custom",
   },
   {
     id: "15",
     position: { x: 500, y: 570 },
     data: { label: "3" },
-    type: "selector",
-    targetPosition: Position.Left,
-    sourcePosition: Position.Right,
+    type: "custom",
   },
   {
     id: "16",
     position: { x: 500, y: 520 },
     data: { label: "koko" },
-    type: "selector",
-    targetPosition: Position.Left,
-    sourcePosition: Position.Right,
+    type: "custom",
   },
   {
     id: "17",
     position: { x: 800, y: 140 },
     data: { label: "3" },
-    type: "selector",
-    targetPosition: Position.Left,
-    sourcePosition: Position.Right,
+    type: "custom",
   },
   {
     id: "18",
     position: { x: 800, y: 90 },
     data: { label: "3" },
-    type: "selector",
-    targetPosition: Position.Left,
-    sourcePosition: Position.Right,
+    type: "custom",
   },
   {
     id: "19",
     position: { x: 1100, y: 25 },
     data: { label: "3" },
-    type: "selector",
-    targetPosition: Position.Left,
-    sourcePosition: Position.Right,
+    type: "custom",
   },
   {
     id: "20",
     position: { x: 1100, y: 75 },
     data: { label: "3" },
-    type: "selector",
-    targetPosition: Position.Left,
-    sourcePosition: Position.Right,
+    type: "custom",
   },
   {
     id: "21",
     position: { x: 1100, y: 125 },
     data: { label: "3" },
-    type: "selector",
-    targetPosition: Position.Left,
-    sourcePosition: Position.Right,
+    type: "custom",
   },
   {
     id: "22",
     position: { x: 1100, y: 175 },
     data: { label: "3" },
-    type: "selector",
-    targetPosition: Position.Left,
-    sourcePosition: Position.Right,
+    type: "custom",
   },
   {
     id: "23",
     position: { x: 1400, y: 100 },
     data: { label: "3" },
-    type: "selector",
-    targetPosition: Position.Left,
+    type: "end",
   },
 ];
 const initialEdges: Edge[] = [
@@ -218,7 +215,11 @@ const initialEdges: Edge[] = [
 export const MindMap = () => {
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
-      <ReactFlow nodes={initialNodes} edges={initialEdges} />
+      <ReactFlow
+        nodeTypes={nodeTypes}
+        nodes={initialNodes}
+        edges={initialEdges}
+      />
     </div>
   );
 };

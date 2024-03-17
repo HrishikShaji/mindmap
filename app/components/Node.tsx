@@ -1,81 +1,30 @@
 import React, { memo } from "react";
-import { Handle, useReactFlow, useStoreApi, Position } from "reactflow";
+import { Handle, Position } from "reactflow";
 
-const options = [
-  {
-    value: "smoothstep",
-    label: "Smoothstep",
-  },
-  {
-    value: "step",
-    label: "Step",
-  },
-  {
-    value: "default",
-    label: "Bezier (default)",
-  },
-  {
-    value: "straight",
-    label: "Straight",
-  },
-];
+interface NodeProps {
+  data: Record<string, any>;
+}
 
-function Select({ value, handleId, nodeId }) {
-  const { setNodes } = useReactFlow();
-  const store = useStoreApi();
-
-  const onChange = (evt) => {
-    const { nodeInternals } = store.getState();
-    setNodes(
-      Array.from(nodeInternals.values()).map((node) => {
-        if (node.id === nodeId) {
-          node.data = {
-            ...node.data,
-            selects: {
-              ...node.data.selects,
-              [handleId]: evt.target.value,
-            },
-          };
-        }
-
-        return node;
-      }),
-    );
-  };
-
+function CustomNode({ data }: NodeProps) {
   return (
-    <div className="custom-node__select">
-      <div>Edge Type</div>
-      <select className="nodrag" onChange={onChange} value={value}>
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
-      <Handle type="source" position={Position.Right} id={handleId} />
+    <div className="w-[100px] flex justify-center py-1 shadow-md rounded-md bg-white border-2 border-stone-400">
+      <div className="flex">
+        <div className="">
+          <div className="text-lg font-bold">{data.label}</div>
+        </div>
+      </div>
+      <Handle
+        type="target"
+        position={Position.Left}
+        className="w-2 h-2 !bg-teal-500"
+      />
+      <Handle
+        type="source"
+        position={Position.Right}
+        className="w-2 h-2 !bg-teal-500"
+      />
     </div>
   );
 }
 
-function Node({ id, data }) {
-  return (
-    <>
-      <div className="custom-node__header">
-        This is a <strong>custom node</strong>
-      </div>
-      <div className="custom-node__body">
-        {Object.keys(data.selects).map((handleId) => (
-          <Select
-            key={handleId}
-            nodeId={id}
-            value={data.selects[handleId]}
-            handleId={handleId}
-          />
-        ))}
-      </div>
-    </>
-  );
-}
-
-export default memo(Node);
+export default memo(CustomNode);
