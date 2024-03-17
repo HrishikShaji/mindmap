@@ -1,5 +1,6 @@
 import React, { memo } from "react";
 import { Handle, Position, useNodeId, useNodes } from "reactflow";
+import { useNodeEdgeContext } from "../context/NodeEdgeContext";
 
 interface NodeProps {
 	data: Record<string, any>;
@@ -7,6 +8,13 @@ interface NodeProps {
 
 function CustomNode({ data }: NodeProps) {
 	const node = useNodeId();
+	const { setNodes } = useNodeEdgeContext();
+
+	if (!node) return null;
+	function deleteNode({ id }: { id: string }) {
+		setNodes((prev) => prev.filter((item) => item.id !== id));
+	}
+
 	return (
 		<div className="w-[200px] bg-white flex p-1 shadow-md rounded-md  border-2 border-stone-400">
 			<div className="flex gap-4">
@@ -14,6 +22,7 @@ function CustomNode({ data }: NodeProps) {
 				<div className="">
 					<div className=" font-semibold">{data.label}</div>
 				</div>
+				<button onClick={() => deleteNode({ id: node })}>DELETE</button>
 			</div>
 			<Handle
 				type="target"
