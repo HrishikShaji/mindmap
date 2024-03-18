@@ -19,6 +19,41 @@ export const MindMap = () => {
 		useNodeEdgeContext();
 	const [label, setLabel] = useState("");
 	const [id, setId] = useState("");
+	const [source, setSource] = useState("");
+	const [target, setTarget] = useState("");
+
+	function disconnectNodes(e: FormEvent) {
+		e.preventDefault();
+		try {
+			setEdges((prev) =>
+				prev.filter((item) => item.id !== `e${source}-${target}`),
+			);
+		} catch (err) {
+			console.log(err);
+		} finally {
+			setSource("");
+			setTarget("");
+		}
+	}
+
+	function connectNodes(e: FormEvent) {
+		e.preventDefault();
+		try {
+			setEdges((prev) => [
+				...prev,
+				{
+					id: `e${source}-${target}`,
+					source: source,
+					target: target,
+				},
+			]);
+		} catch (err) {
+			console.log(err);
+		} finally {
+			setSource("");
+			setTarget("");
+		}
+	}
 
 	function deleteNode(e: FormEvent) {
 		e.preventDefault();
@@ -79,6 +114,46 @@ export const MindMap = () => {
 						type="submit"
 					>
 						Delete
+					</button>
+				</form>
+				<form className="flex gap-2" onSubmit={connectNodes}>
+					<input
+						value={source}
+						onChange={(e) => setSource(e.target.value)}
+						placeholder="source..."
+						className="p-1 rounded-md"
+					/>
+					<input
+						value={target}
+						onChange={(e) => setTarget(e.target.value)}
+						placeholder="target..."
+						className="p-1 rounded-md"
+					/>
+					<button
+						className="bg-white text-black py-1 px-3 rounded-md"
+						type="submit"
+					>
+						Connect
+					</button>
+				</form>
+				<form className="flex gap-2" onSubmit={disconnectNodes}>
+					<input
+						value={source}
+						onChange={(e) => setSource(e.target.value)}
+						placeholder="source..."
+						className="p-1 rounded-md"
+					/>
+					<input
+						value={target}
+						onChange={(e) => setTarget(e.target.value)}
+						placeholder="target..."
+						className="p-1 rounded-md"
+					/>
+					<button
+						className="bg-white text-black py-1 px-3 rounded-md"
+						type="submit"
+					>
+						Disconnect
 					</button>
 				</form>
 			</div>
