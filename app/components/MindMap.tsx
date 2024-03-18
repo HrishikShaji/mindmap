@@ -7,10 +7,9 @@ import "reactflow/dist/style.css";
 import StartNode from "./StartNode";
 import EndNode from "./EndNode";
 import { useNodeEdgeContext } from "../context/NodeEdgeContext";
-import { AddNode } from "./AddNode";
-import { DeleteNode } from "./DeleteNode";
-import { ConnectNodes } from "./ConnectNodes";
-import { DisconnectNodes } from "./DisconnectNodes";
+import { MdEdit } from "react-icons/md";
+import { useEdit } from "../context/EditContext";
+import { EditSection } from "./EditSection";
 
 const nodeTypes: NodeTypes = {
 	custom: CustomNode,
@@ -18,52 +17,19 @@ const nodeTypes: NodeTypes = {
 	end: EndNode,
 };
 
-type LookupType = {
-	[key: string]: ReactNode;
-};
-
-const lookup: LookupType = {
-	"add-node": <AddNode />,
-	"delete-node": <DeleteNode />,
-	"connect-nodes": <ConnectNodes />,
-	"disconnect-nodes": <DisconnectNodes />,
-};
-
 export const MindMap = () => {
 	const { onNodesChange, onEdgesChange, nodes, edges } = useNodeEdgeContext();
-	const [selected, setSelected] = useState("add-node");
+	const { isEdit, toggleEdit } = useEdit();
 	return (
-		<div className="h-screen  flex flex-col">
-			<div className=" bg-teal-500 p-5 gap-5 flex flex-col">
-				<div className="flex gap-10">
-					<button
-						onClick={() => setSelected("add-node")}
-						className="px-3 py-1 rounded-md bg-teal-300"
-					>
-						Add Node
-					</button>
-					<button
-						onClick={() => setSelected("delete-node")}
-						className="px-3 py-1 rounded-md bg-teal-300"
-					>
-						Delete Node
-					</button>
-					<button
-						onClick={() => setSelected("connect-nodes")}
-						className="px-3 py-1 rounded-md bg-teal-300"
-					>
-						Connect Nodes
-					</button>
-					<button
-						onClick={() => setSelected("disconnect-nodes")}
-						className="px-3 py-1 rounded-md bg-teal-300"
-					>
-						Disconnect Nodes
-					</button>
-				</div>
-				{lookup[selected]}
+		<div className="h-screen relative flex flex-col w-screen">
+			<div
+				onClick={toggleEdit}
+				className="absolute cursor-pointer z-20 top-5 left-5 rounded-full p-2 bg-neutral-500 text-white  "
+			>
+				<MdEdit />
 			</div>
-			<div style={{ width: "100vw", height: "90vh" }}>
+			{isEdit ? <EditSection /> : null}
+			<div style={{ width: "100vw", height: "100vh" }}>
 				<ReactFlow
 					onNodesChange={onNodesChange}
 					onEdgesChange={onEdgesChange}

@@ -5,6 +5,7 @@ import { NodeEdgeProvider } from "./context/NodeEdgeContext";
 import { data, edges, nodePositions } from "./components/data";
 import { ModalProvider } from "./context/ModalContext";
 import { Modal } from "./components/Modal";
+import { EditProvider } from "./context/EditContext";
 
 function coordinates({ id }: { id: string }) {
 	const newId = parseInt(id);
@@ -26,15 +27,17 @@ export default function Home() {
 	const initialEdges: Edge[] = edges;
 	return (
 		<main>
-			<ModalProvider>
-				<NodeEdgeProvider
-					initialEdges={initialEdges}
-					initialNodes={initialNodes}
-				>
-					<Modal />
-					<MindMap />
-				</NodeEdgeProvider>
-			</ModalProvider>
+			<EditProvider>
+				<ModalProvider>
+					<NodeEdgeProvider
+						initialEdges={initialEdges}
+						initialNodes={initialNodes}
+					>
+						<Modal />
+						<MindMap />
+					</NodeEdgeProvider>
+				</ModalProvider>
+			</EditProvider>
 		</main>
 	);
 }
