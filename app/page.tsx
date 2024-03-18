@@ -3,6 +3,8 @@ import { Edge, Node } from "reactflow";
 import { MindMap } from "./components/MindMap";
 import { NodeEdgeProvider } from "./context/NodeEdgeContext";
 import { data, edges, nodePositions } from "./components/data";
+import { ModalProvider } from "./context/ModalContext";
+import { Modal } from "./components/Modal";
 
 function coordinates({ id }: { id: string }) {
 	const newId = parseInt(id);
@@ -24,9 +26,15 @@ export default function Home() {
 	const initialEdges: Edge[] = edges;
 	return (
 		<main>
-			<NodeEdgeProvider initialEdges={initialEdges} initialNodes={initialNodes}>
-				<MindMap />
-			</NodeEdgeProvider>
+			<ModalProvider>
+				<NodeEdgeProvider
+					initialEdges={initialEdges}
+					initialNodes={initialNodes}
+				>
+					<Modal />
+					<MindMap />
+				</NodeEdgeProvider>
+			</ModalProvider>
 		</main>
 	);
 }
