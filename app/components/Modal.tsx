@@ -3,16 +3,19 @@ import { useModal } from "../context/ModalContext";
 import { useNodeEdgeContext } from "../context/NodeEdgeContext";
 import { useEdit } from "../context/EditContext";
 import { BarChart } from "./BarChart";
+import { Node } from "reactflow";
 
 export const Modal = () => {
   const [label, setIsLabel] = useState("");
   const { isOpen, closeModal, id } = useModal();
   const { setNodes, nodes } = useNodeEdgeContext();
+  const [currentNode, setCurrentNode] = useState<Node | null>(null);
   const { isEdit } = useEdit();
   useEffect(() => {
     const currentNode = nodes.filter((item) => item.id === id);
     if (currentNode.length !== 0) {
       setIsLabel(currentNode[0].data.label);
+      setCurrentNode(currentNode[0]);
     }
   }, [id, nodes]);
 
@@ -55,7 +58,9 @@ export const Modal = () => {
           </form>
         ) : (
           <div>
-            <BarChart />
+            {currentNode ? (
+              <BarChart graphData={currentNode?.data.graphData} />
+            ) : null}
           </div>
         )}
       </div>

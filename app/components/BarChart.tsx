@@ -1,26 +1,17 @@
 import { useEffect, useRef } from "react";
 import * as d3 from "d3";
 
-export const BarChart = () => {
+type GraphElement = {
+  label: string;
+  value: number;
+};
+
+interface BarChartProps {
+  graphData: GraphElement[];
+}
+
+export const BarChart: React.FC<BarChartProps> = ({ graphData }) => {
   const svgRef = useRef<SVGSVGElement>(null);
-  const newData = [
-    {
-      label: "positive",
-      value: 10,
-    },
-    {
-      label: "negative",
-      value: 7,
-    },
-    {
-      label: "total",
-      value: 17,
-    },
-    {
-      label: "comments",
-      value: 25,
-    },
-  ];
 
   const dimensions = {
     width: 500,
@@ -31,22 +22,22 @@ export const BarChart = () => {
     marginTop: 50,
   };
 
-  const maxValue = d3.max(newData, (d) => d.value);
-  const y = d3
-    .scaleLinear()
-    .domain([0, maxValue!])
-    .range([dimensions.chartHeight, 0]);
-  const x = d3
-    .scaleBand()
-    .domain(newData.map((d) => d.label))
-    .range([0, dimensions.chartWidth])
-    .paddingInner(0.1)
-    .paddingOuter(0.3);
-
-  const yAxis = d3.axisLeft(y).ticks(3);
-  const xAxis = d3.axisBottom(x);
-
   useEffect(() => {
+    console.log(graphData);
+    const maxValue = d3.max(graphData, (d) => d.value);
+    const y = d3
+      .scaleLinear()
+      .domain([0, maxValue!])
+      .range([dimensions.chartHeight, 0]);
+    const x = d3
+      .scaleBand()
+      .domain(graphData.map((d) => d.label))
+      .range([0, dimensions.chartWidth])
+      .paddingInner(0.1)
+      .paddingOuter(0.3);
+
+    const yAxis = d3.axisLeft(y).ticks(3);
+    const xAxis = d3.axisBottom(x);
     const svg = d3.select(svgRef.current);
 
     svg
@@ -71,7 +62,7 @@ export const BarChart = () => {
 
     chartGroup
       .selectAll("rect")
-      .data(newData)
+      .data(graphData)
       .enter()
       .append("rect")
       .attr("x", (d) => x(d.label)!)
