@@ -11,7 +11,7 @@ interface NodeProps {
 
 function CustomNode({ data }: NodeProps) {
 	const node = useNodeId();
-	const { isEdit } = useEdit();
+	const { isEdit, setState } = useEdit();
 	const { setNodes } = useNodeEdgeContext();
 	const { openModal } = useModal();
 
@@ -40,7 +40,12 @@ function CustomNode({ data }: NodeProps) {
 						<button onClick={() => deleteNode()}>
 							<MdDelete />
 						</button>
-						<button onClick={() => openModal(node)}>
+						<button
+							onClick={() => {
+								openModal(node);
+								setState("editNode");
+							}}
+						>
 							<MdEdit />
 						</button>
 					</div>

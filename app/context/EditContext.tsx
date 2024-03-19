@@ -1,8 +1,25 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, {
+	createContext,
+	useContext,
+	useState,
+	ReactNode,
+	SetStateAction,
+	Dispatch,
+} from "react";
+
+type EditState =
+	| "editNode"
+	| "addNode"
+	| "deleteNode"
+	| "connectNodes"
+	| "disconnectNodes"
+	| "";
 
 type EditData = {
 	isEdit: boolean;
+	state: EditState;
 	toggleEdit: () => void;
+	setState: Dispatch<SetStateAction<EditState>>;
 };
 
 const EditContext = createContext<EditData | undefined>(undefined);
@@ -21,13 +38,16 @@ type EditProviderProps = {
 
 export const EditProvider = ({ children }: EditProviderProps) => {
 	const [isEdit, setIsEdit] = useState(false);
+	const [state, setState] = useState<EditState>("");
 	const toggleEdit = () => {
 		setIsEdit(!isEdit);
 	};
 
 	const editData = {
 		isEdit,
+		state,
 		toggleEdit,
+		setState,
 	};
 
 	return (
