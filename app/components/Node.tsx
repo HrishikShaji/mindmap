@@ -1,5 +1,5 @@
 import React, { memo, useState } from "react";
-import { Handle, Position, useNodeId } from "reactflow";
+import { Handle, NodeToolbar, Position, useNodeId } from "reactflow";
 import { useNodeEdgeContext } from "../context/NodeEdgeContext";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { useModal } from "../context/ModalContext";
@@ -14,24 +14,24 @@ function CustomNode({ data }: NodeProps) {
 	const { isEdit } = useEdit();
 	const { setNodes } = useNodeEdgeContext();
 	const { openModal } = useModal();
-	const [show, setShow] = useState(false);
 
 	if (!node) return null;
 	function deleteNode() {
 		setNodes((prev) => prev.filter((item) => item.id !== node));
 	}
 
+	function toggleModal() {
+		if (!isEdit && node) {
+			openModal(node);
+		}
+	}
+
 	return (
 		<div
-			onMouseEnter={() => setShow(true)}
-			onMouseLeave={() => setShow(false)}
-			className="w-[200px]  bg-white  flex p-1  relative shadow-md rounded-md  border-2 border-stone-400"
+			onClick={toggleModal}
+			style={{ cursor: isEdit ? "" : "pointer" }}
+			className="w-[200px]  bg-white  flex p-1  relative shadow-md rounded-md  "
 		>
-			{show && (
-				<div className="bg-red-500 absolute z-10 -top-28 left-0 rounded-md h-[100px] w-[100px]">
-					{node}
-				</div>
-			)}
 			<div className="flex   items-center w-full  justify-center">
 				<h1 className=" left-2">{data.id}</h1>
 				<h1 className=" font-semibold text-sm ">{data.label}</h1>
