@@ -21,25 +21,23 @@ function getRandomGraphData() {
   const negative = total - positive;
   const comments = randomInteger({ min: 0, max: 1000 });
 
-  return [
-    {
-      label: "positive",
-      value: positive,
-    },
-    {
-      label: "negative",
-      value: negative,
-    },
-    {
-      label: "total",
-      value: total,
-    },
-    {
-      label: "comments",
-      value: comments,
-    },
-  ];
+  return {
+    positive: positive,
+    negative: negative,
+    comments: comments,
+    total: total,
+  };
 }
+
+export type GraphData = {
+  [key: string]: number;
+};
+
+export type NodeData = {
+  label: string;
+  id: string;
+  graphData: GraphData;
+};
 
 function getNodes({ nodes }: { nodes: any[] }) {
   return nodes.map((node) => {
@@ -47,7 +45,11 @@ function getNodes({ nodes }: { nodes: any[] }) {
       id: node.id,
       type: node.type,
       position: coordinates({ id: node.id }),
-      data: { label: node.label, id: node.id, graphData: getRandomGraphData() },
+      data: {
+        label: node.label,
+        id: node.id,
+        graphData: getRandomGraphData(),
+      } as NodeData,
     };
   });
 }
