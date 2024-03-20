@@ -1,47 +1,49 @@
 "use client";
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import "reactflow/dist/style.css";
 import { useNodeEdgeContext } from "../context/NodeEdgeContext";
+import Checkbox from "./Checkbox";
+
+export type EdgeOption = {
+  source: string;
+  target: string;
+};
 
 export const DisconnectNodes = () => {
-  const { setEdges } = useNodeEdgeContext();
-  const [source, setSource] = useState("");
-  const [target, setTarget] = useState("");
+  const { setEdges, edges } = useNodeEdgeContext();
+  const [selectedItems, setSelectedItems] = useState<EdgeOption[]>([]);
 
-  function disconnectNodes(e: FormEvent) {
-    e.preventDefault();
-    try {
-      setEdges((prev) =>
-        prev.filter((item) => item.source !== source || item.target !== target),
-      );
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setSource("");
-      setTarget("");
-    }
+  function disconnectNodes() {
+    const newEdges = edges.filter(
+      (edge) =>
+        !selectedItems.some(
+          (item) => item.source === edge.source && item.target === edge.target,
+        ),
+    );
+
+    setEdges(newEdges);
   }
 
   return (
-    <form className="flex gap-2" onSubmit={disconnectNodes}>
-      <input
-        value={source}
-        onChange={(e) => setSource(e.target.value)}
-        placeholder="source..."
-        className="p-1 rounded-md"
-      />
-      <input
-        value={target}
-        onChange={(e) => setTarget(e.target.value)}
-        placeholder="target..."
-        className="p-1 rounded-md"
-      />
-      <button
-        className="bg-white text-black py-1 px-3 rounded-md"
-        type="submit"
-      >
+    <div className="flex flex-col gap-5">
+      <div className="grid grid-cols-5 gap-5">
+        {edges.map((edge, i) => (
+          <div
+            key={i}
+            className="flex justify-between px-3 py-1 rounded-3xl bg-teal-500"
+          >
+            <h1>{` ${edge.source}-${edge.target} `}</h1>
+            <Checkbox
+              source={edge.source}
+              target={edge.target}
+              onChange={setSelectedItems}
+            />
+          </div>
+        ))}
+      </div>
+      <button className="p-2 rounded-3xl bg-white" onClick={disconnectNodes}>
         Disconnect
       </button>
-    </form>
+    </div>
   );
 };

@@ -4,7 +4,7 @@ import "reactflow/dist/style.css";
 import { useNodeEdgeContext } from "../context/NodeEdgeContext";
 
 export const ConnectNodes = () => {
-  const { setEdges } = useNodeEdgeContext();
+  const { setEdges, edges } = useNodeEdgeContext();
   const [source, setSource] = useState("");
   const [target, setTarget] = useState("");
 
@@ -29,6 +29,7 @@ export const ConnectNodes = () => {
 
   return (
     <form className="flex gap-2" onSubmit={connectNodes}>
+      <div className="flex flex-col gap-1"></div>
       <input
         value={source}
         onChange={(e) => setSource(e.target.value)}
