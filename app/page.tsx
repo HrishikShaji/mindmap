@@ -7,25 +7,29 @@ import { EditProvider } from "./context/EditContext";
 import { initialEdges, initialNodes } from "./lib/data";
 import { Node } from "reactflow";
 import { Navbar } from "./components/Navbar";
-import { ThemeProvider } from "./context/ThemeContext";
+import { ThemeProvider, useTheme } from "./context/ThemeContext";
 
 export default function Home() {
+	const { getBG } = useTheme();
 	return (
-		<ThemeProvider>
-			<main className="px-[2vw] pt-[7vh] h-screen bg-neutral-900">
-				<Navbar />
-				<EditProvider>
-					<ModalProvider>
-						<NodeEdgeProvider
-							initialEdges={initialEdges}
-							initialNodes={initialNodes as Node[]}
-						>
-							<Modal />
-							<MindMap />
-						</NodeEdgeProvider>
-					</ModalProvider>
-				</EditProvider>
-			</main>
-		</ThemeProvider>
+		<main
+			className="px-[2vw] pt-[7vh] h-screen "
+			style={{
+				backgroundColor: getBG({ defaultColor: "gray" }).secondary,
+			}}
+		>
+			<Navbar />
+			<EditProvider>
+				<ModalProvider>
+					<NodeEdgeProvider
+						initialEdges={initialEdges}
+						initialNodes={initialNodes as Node[]}
+					>
+						<Modal />
+						<MindMap />
+					</NodeEdgeProvider>
+				</ModalProvider>
+			</EditProvider>
+		</main>
 	);
 }

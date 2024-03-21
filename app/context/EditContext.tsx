@@ -7,10 +7,10 @@ import React, {
 	Dispatch,
 } from "react";
 
-type EditState =
+export type EditState =
 	| "editNode"
 	| "addNode"
-	| "deleteNode"
+	| "deleteNodes"
 	| "connectNodes"
 	| "disconnectNodes"
 	| "";

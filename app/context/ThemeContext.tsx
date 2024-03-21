@@ -1,3 +1,5 @@
+"use client";
+
 import React, {
 	createContext,
 	useContext,
@@ -49,7 +51,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
 
 	const light: ThemeColors = {
 		primary: "white",
-		secondary: "#fafafa",
+		secondary: "#e5e5e5",
 		ternary: "#a1a1aa",
 	};
 

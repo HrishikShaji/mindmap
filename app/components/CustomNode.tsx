@@ -28,20 +28,43 @@ function CustomNode({ data }: NodeProps) {
 				style={{ justifyContent: isEdit ? "space-between" : "center" }}
 			>
 				{isEdit && (
-					<h1 className="w-8 h-8 flex items-center justify-center text-sm text-teal-500 rounded-full bg-neutral-800 ">
+					<h1
+						className="w-8 h-8 flex items-center justify-center text-sm  rounded-full "
+						style={{
+							backgroundColor: getBG({ defaultColor: "white" }).ternary,
+							color: getTextColor(),
+						}}
+					>
 						{data.id}
 					</h1>
 				)}
 				<h1 className=" font-semibold text-sm ">{data.label}</h1>
 				{isEdit && (
-					<div className="flex gap-1  p-1 rounded-3xl bg-neutral-800 text-teal-500 ">
+					<div
+						style={{
+							backgroundColor: getBG({ defaultColor: "black" }).ternary,
+							color: getTextColor(),
+						}}
+						className="flex gap-1  p-1 rounded-3xl  "
+					>
 						<button
-							className="p-1 rounded-full bg-black"
+							className="p-1 rounded-full "
 							onClick={() => deleteNode()}
+							style={{
+								backgroundColor: getBG({ defaultColor: "white" }).primary,
+								color: getTextColor(),
+							}}
 						>
 							<MdDelete />
 						</button>
-						<button className="p-1 rounded-full bg-black " onClick={toggleEdit}>
+						<button
+							className="p-1 rounded-full  "
+							onClick={toggleEdit}
+							style={{
+								backgroundColor: getBG({ defaultColor: "white" }).primary,
+								color: getTextColor(),
+							}}
+						>
 							<MdEdit />
 						</button>
 					</div>
