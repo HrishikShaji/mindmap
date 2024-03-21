@@ -12,6 +12,7 @@ export type NodeOption = {
 export type NodeData = {
 	label: string;
 	id: string;
+	color: string;
 	graphData: GraphData;
 };
 
