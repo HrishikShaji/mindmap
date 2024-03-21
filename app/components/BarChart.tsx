@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import * as d3 from "d3";
-import { GraphData } from "../page";
+import { GraphData } from "../lib/types";
 
 interface BarChartProps {
   graphData: GraphData;

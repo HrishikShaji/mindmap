@@ -1,29 +1,11 @@
 "use client";
-import React, { FormEvent, useEffect, useState } from "react";
+import React from "react";
 import "reactflow/dist/style.css";
-import { useNodeEdgeContext } from "../context/NodeEdgeContext";
 import Checkbox from "./Checkbox";
-
-export type EdgeOption = {
-  source: string;
-  target: string;
-};
+import { useDisconnectNodes } from "../hooks/useDisconnectNodes";
 
 export const DisconnectNodes = () => {
-  const { setEdges, edges } = useNodeEdgeContext();
-  const [selectedItems, setSelectedItems] = useState<EdgeOption[]>([]);
-
-  function disconnectNodes() {
-    const newEdges = edges.filter(
-      (edge) =>
-        !selectedItems.some(
-          (item) => item.source === edge.source && item.target === edge.target,
-        ),
-    );
-
-    setEdges(newEdges);
-  }
-
+  const { edges, disconnectNodes, setSelectedItems } = useDisconnectNodes();
   return (
     <div className="flex flex-col gap-5">
       <div className="grid grid-cols-5 gap-5">

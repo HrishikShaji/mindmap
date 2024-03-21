@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
-import { EdgeOption } from "./DisconnectNodes";
+import { EdgeOption } from "../lib/types";
 
 interface CheckBoxProps {
   source: string;
