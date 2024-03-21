@@ -35,6 +35,7 @@ const Checkbox: React.FC<CheckBoxProps> = ({ source, target, onChange }) => {
           defaultChecked={false}
           ref={inputRef}
           onChange={handleChange}
+          className="checkbox-round"
           type="checkbox"
         />
       </label>

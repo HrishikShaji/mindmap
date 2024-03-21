@@ -73,15 +73,17 @@ export const BarChart: React.FC<BarChartProps> = ({ graphData }) => {
       .delay((_, i) => i * 100)
       .attr("y", (d) => y(d.value)!)
       .attr("height", (d) => dimensions.chartHeight - y(d.value))
-      .attr("fill", "white");
+      .attr("fill", "black");
   }, []);
 
   return (
-    <div className="">
+    <div className="hidden sm:block w-[500px]">
       <svg
+        viewBox="0 0 500 300"
+        preserveAspectRatio="xMidYMid meet"
         ref={svgRef}
-        width={dimensions.width}
-        height={dimensions.height}
+        width="100%"
+        height="100%"
       ></svg>
     </div>
   );

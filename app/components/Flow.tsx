@@ -21,10 +21,11 @@ function Flow() {
   return (
     <div
       ref={reactFlowWrapper}
-      className="bg-neutral-700 rounded-3xl"
+      className="bg-neutral-800 rounded-3xl"
       style={{ width: "96vw", height: "90vh" }}
     >
       <ReactFlow
+        fitView
         onConnectStart={onConnectStart as any}
         onConnectEnd={onConnectEnd as any}
         onNodesChange={onNodesChange}

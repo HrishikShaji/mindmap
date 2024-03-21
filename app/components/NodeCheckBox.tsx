@@ -27,6 +27,7 @@ const NodeCheckbox: React.FC<NodeCheckBoxProps> = ({ reset, id, onChange }) => {
 		<div className="checkbox-wrapper">
 			<label>
 				<input
+					className="checkbox-round"
 					defaultChecked={false}
 					ref={inputRef}
 					onChange={handleChange}

@@ -6,7 +6,7 @@ import FlowWithProvider from "./Flow";
 
 export const MindMap = () => {
   return (
-    <div className=" relative flex flex-col">
+    <div className=" relative flex flex-col ">
       <EditSection />
       <FlowWithProvider />
     </div>

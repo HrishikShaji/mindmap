@@ -14,21 +14,21 @@ export const EditSection = () => {
     }
   }
   return (
-    <div className=" relative flex flex-col">
+    <div className=" relative flex items-center">
       <div
         onClick={toggleEditSection}
-        className="absolute cursor-pointer z-20 top-5 left-5 rounded-full p-2 bg-neutral-500 text-white  "
+        className="absolute cursor-pointer z-20 top-5 left-5 rounded-full p-2 bg-teal-500 text-black  "
       >
         <MdEdit />
       </div>
       {isEdit ? (
-        <div className="  z-10 absolute top-5 left-16 rounded-md  flex gap-4">
+        <div className="  z-10 absolute top-6 left-16 rounded-md   flex flex-col sm:flex-row gap-1  sm:gap-4">
           <button
             onClick={() => {
               setState("addNode");
               openModal();
             }}
-            className="px-3 py-1 rounded-3xl bg-teal-300"
+            className="px-3 py-1 text-sm rounded-3xl bg-black text-teal-500"
           >
             Add Node
           </button>
@@ -37,7 +37,7 @@ export const EditSection = () => {
               setState("deleteNode");
               openModal();
             }}
-            className="px-3 py-1 rounded-3xl bg-teal-300"
+            className="px-3 py-1 text-sm rounded-3xl bg-black text-teal-500"
           >
             Delete Node
           </button>
@@ -46,7 +46,7 @@ export const EditSection = () => {
               setState("connectNodes");
               openModal();
             }}
-            className="px-3 py-1 rounded-3xl bg-teal-300"
+            className="px-3 py-1 text-sm rounded-3xl bg-black text-teal-500"
           >
             Connect Nodes
           </button>
@@ -55,7 +55,7 @@ export const EditSection = () => {
               setState("disconnectNodes");
               openModal();
             }}
-            className="px-3 py-1 rounded-3xl bg-teal-300"
+            className="px-3 py-1 text-sm rounded-3xl bg-black text-teal-500"
           >
             Disconnect Nodes
           </button>
