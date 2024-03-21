@@ -14,7 +14,7 @@ function CustomNode({ data }: NodeProps) {
 		<div
 			onClick={toggleModal}
 			style={{ cursor: isEdit ? "" : "pointer" }}
-			className="w-[250px]  bg-white  flex h-12 px-1  relative shadow-md rounded-3xl  "
+			className="w-[260px]  bg-white  flex h-12 px-1  relative shadow-md rounded-3xl  "
 		>
 			<div
 				className="flex   items-center w-full "

@@ -5,6 +5,10 @@ export type GraphData = {
 	[key: string]: number;
 };
 
+export type NodeOption = {
+	label: string;
+	id: string;
+};
 export type NodeData = {
 	label: string;
 	id: string;
