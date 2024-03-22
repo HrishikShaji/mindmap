@@ -26,7 +26,7 @@ export const EditSection = () => {
 	const { openModal } = useModal();
 	const { isEdit, toggleEdit, setState } = useEdit();
 	const { closeModal, isOpen } = useModal();
-	const { getTextColor, getBG } = useTheme();
+	const { getTheme } = useTheme();
 	function toggleEditSection() {
 		toggleEdit();
 		setState("");
@@ -54,8 +54,8 @@ export const EditSection = () => {
 							}}
 							className="px-3 py-1 text-sm rounded-3xl "
 							style={{
-								backgroundColor: getBG({ defaultColor: "gray" }).primary,
-								color: getTextColor(),
+								backgroundColor: getTheme().primary.backgroundColor,
+								color: getTheme().primary.textColor,
 							}}
 						>
 							{button.label}

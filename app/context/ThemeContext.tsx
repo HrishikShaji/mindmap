@@ -11,19 +11,21 @@ import React, {
 
 type Theme = "dark" | "light" | "default";
 
-type GetBGParams = {
-	defaultColor?: string;
+type ThemeItem = {
+	backgroundColor: string;
+	textColor: string;
 };
+
 type ThemeColors = {
-	primary: string;
-	secondary: string;
-	ternary: string;
+	primary: ThemeItem;
+	secondary: ThemeItem;
+	ternary: ThemeItem;
+	button: ThemeItem;
 };
 
 type ThemeData = {
 	setTheme: Dispatch<SetStateAction<Theme>>;
-	getBG: ({ defaultColor }: GetBGParams) => ThemeColors;
-	getTextColor: () => string;
+	getTheme: (color?: string) => ThemeColors;
 	theme: Theme;
 };
 
@@ -44,51 +46,53 @@ type ThemeProviderProps = {
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
 	const [theme, setTheme] = useState<Theme>("dark");
 
-	const dark: ThemeColors = {
-		primary: "black",
-		secondary: "#171717",
-		ternary: "#262626",
+	const darkTheme: ThemeColors = {
+		primary: { backgroundColor: "black", textColor: "#14b8a6" },
+		secondary: { backgroundColor: "#171717", textColor: "white" },
+		ternary: { backgroundColor: "#262626", textColor: "#9ca3af" },
+		button: { backgroundColor: "#14b8a6", textColor: "black" },
+	};
+	const lightTheme: ThemeColors = {
+		primary: { backgroundColor: "white", textColor: "#0d9488" },
+		secondary: { backgroundColor: "#e5e5e5", textColor: "black" },
+		ternary: { backgroundColor: "#9ca3af", textColor: "white" },
+		button: { backgroundColor: "#14b8a6", textColor: "white" },
+	};
+	const defaultTheme: ThemeColors = {
+		primary: { backgroundColor: "#0d9488", textColor: "black" },
+		secondary: { backgroundColor: "#14b8a6", textColor: "black" },
+		ternary: { backgroundColor: "#2dd4bf", textColor: "black" },
+		button: { backgroundColor: "black", textColor: "#14b8a6" },
 	};
 
-	const light: ThemeColors = {
-		primary: "white",
-		secondary: "#e5e5e5",
-		ternary: "#a1a1aa",
-	};
-
-	function getBG({ defaultColor }: GetBGParams) {
-		let themeObj: ThemeColors = { primary: "", secondary: "", ternary: "" };
+	function getTheme(color?: string) {
+		let themeObj: ThemeColors = {
+			primary: { backgroundColor: "", textColor: "" },
+			secondary: { backgroundColor: "", textColor: "" },
+			ternary: { backgroundColor: "", textColor: "" },
+			button: { backgroundColor: "", textColor: "" },
+		};
 		if (theme === "dark") {
-			themeObj = dark;
+			themeObj = darkTheme;
 		} else if (theme === "light") {
-			themeObj = light;
-		} else if (theme === "default" && defaultColor) {
+			themeObj = lightTheme;
+		} else if (theme === "default" && color) {
 			themeObj = {
-				primary: defaultColor,
-				secondary: defaultColor,
-				ternary: defaultColor,
+				primary: { backgroundColor: color, textColor: color },
+				secondary: { backgroundColor: color, textColor: color },
+				ternary: { backgroundColor: color, textColor: color },
+				button: { backgroundColor: color, textColor: color },
 			};
+		} else if (theme === "default" && !color) {
+			themeObj = defaultTheme;
 		}
 
 		return themeObj;
 	}
 
-	function getTextColor() {
-		let themeColor = "";
-		if (theme === "dark") {
-			themeColor = "#14b8a6";
-		} else if (theme === "light") {
-			themeColor = "black";
-		} else if (theme === "default") {
-			themeColor = "black";
-		}
-		return themeColor;
-	}
-
 	const themeData: ThemeData = {
 		setTheme,
-		getBG,
-		getTextColor,
+		getTheme,
 		theme,
 	};
 

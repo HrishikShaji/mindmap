@@ -11,15 +11,15 @@ interface NodeProps {
 
 function CustomNode({ data }: NodeProps) {
 	const { toggleModal, deleteNode, toggleEdit, isEdit } = useCustomNode();
-	const { getTextColor, getBG } = useTheme();
+	const { getTheme } = useTheme();
 
 	return (
 		<div
 			onClick={toggleModal}
 			style={{
 				cursor: isEdit ? "" : "pointer",
-				backgroundColor: getBG({ defaultColor: data.color }).primary,
-				color: getTextColor(),
+				backgroundColor: getTheme(data.color).primary.backgroundColor,
+				color: getTheme().primary.textColor,
 			}}
 			className="w-[260px]    flex h-10 px-1  relative shadow-md rounded-3xl  "
 		>
@@ -31,8 +31,8 @@ function CustomNode({ data }: NodeProps) {
 					<h1
 						className="w-8 h-8 flex items-center justify-center text-sm  rounded-full "
 						style={{
-							backgroundColor: getBG({ defaultColor: "white" }).ternary,
-							color: getTextColor(),
+							backgroundColor: getTheme().ternary.backgroundColor,
+							color: getTheme().ternary.textColor,
 						}}
 					>
 						{data.id}
@@ -42,8 +42,8 @@ function CustomNode({ data }: NodeProps) {
 				{isEdit && (
 					<div
 						style={{
-							backgroundColor: getBG({ defaultColor: "black" }).ternary,
-							color: getTextColor(),
+							backgroundColor: getTheme().ternary.backgroundColor,
+							color: getTheme().ternary.textColor,
 						}}
 						className="flex gap-1  p-1 rounded-3xl  "
 					>
@@ -51,8 +51,8 @@ function CustomNode({ data }: NodeProps) {
 							className="p-1 rounded-full "
 							onClick={() => deleteNode()}
 							style={{
-								backgroundColor: getBG({ defaultColor: "white" }).primary,
-								color: getTextColor(),
+								backgroundColor: getTheme(data.color).primary.backgroundColor,
+								color: getTheme().primary.textColor,
 							}}
 						>
 							<MdDelete />
@@ -61,8 +61,8 @@ function CustomNode({ data }: NodeProps) {
 							className="p-1 rounded-full  "
 							onClick={toggleEdit}
 							style={{
-								backgroundColor: getBG({ defaultColor: "white" }).primary,
-								color: getTextColor(),
+								backgroundColor: getTheme(data.color).primary.backgroundColor,
+								color: getTheme().primary.textColor,
 							}}
 						>
 							<MdEdit />
@@ -74,11 +74,15 @@ function CustomNode({ data }: NodeProps) {
 				type="target"
 				position={Position.Left}
 				className="w-2 h-2 !bg-teal-500 "
+				onConnect={(params) => console.log('handle onConnect', params)}
+				isConnectable={true}
 			/>
 			<Handle
 				type="source"
 				position={Position.Right}
 				className="w-2 h-2 !bg-teal-500"
+				isConnectable={true}
+				onConnect={(params) => console.log('handle onConnect', params)}
 			/>
 		</div>
 	);

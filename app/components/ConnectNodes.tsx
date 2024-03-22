@@ -10,9 +10,18 @@ export const ConnectNodes = () => {
 	const { connectNodes, option, options, reset, nodes, setOption, setTargets } =
 		useConnectNodes();
 
-	const { getBG } = useTheme();
+	const { getTheme } = useTheme();
 	return (
 		<form className="flex gap-10 flex-col" onSubmit={connectNodes}>
+			<h1
+				className=" border-b-2  font-semibold pb-3"
+				style={{
+					color: getTheme().primary.textColor,
+					borderColor: getTheme().primary.textColor,
+				}}
+			>
+				CONNECT NODES
+			</h1>
 			<div className="flex flex-col gap-4">
 				<div className="flex flex-col gap-2">
 					<h1>Select Source</h1>
@@ -21,19 +30,19 @@ export const ConnectNodes = () => {
 				<div className="flex flex-col gap-4">
 					<h1>Select Targets</h1>
 
-					<div className="grid grid-cols-1 h-[300px] overflow-y-scroll pr-2   gap-2 ">
+					<div className="custom-scrollbar grid grid-cols-1 h-[300px] overflow-y-scroll pr-2   gap-2 ">
 						{nodes.map((node, i) => (
 							<div
 								key={i}
 								className="flex justify-between items-center p-1  rounded-3xl"
 								style={{
-									backgroundColor: getBG({ defaultColor: "white" }).primary,
+									backgroundColor: getTheme().primary.backgroundColor,
 								}}
 							>
 								<h1
 									className=" w-6 text-xs flex justify-center items-center h-6 rounded-full "
 									style={{
-										backgroundColor: getBG({ defaultColor: "gray" }).secondary,
+										backgroundColor: getTheme().secondary.backgroundColor,
 									}}
 								>
 									{node.id}
@@ -51,7 +60,10 @@ export const ConnectNodes = () => {
 			</div>
 			<button
 				className="p-3 rounded-3xl"
-				style={{ backgroundColor: getBG({ defaultColor: "white" }).primary }}
+				style={{
+					backgroundColor: getTheme().button.backgroundColor,
+					color: getTheme().button.textColor,
+				}}
 			>
 				Connect
 			</button>

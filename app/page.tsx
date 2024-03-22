@@ -10,7 +10,7 @@ import { Navbar } from "./components/Navbar";
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
 
 export default function Home() {
-	const { getBG, theme } = useTheme();
+	const { getTheme, theme } = useTheme();
 	return (
 		<main
 			className={theme}
@@ -19,7 +19,7 @@ export default function Home() {
 				paddingLeft: "2vw",
 				paddingTop: "7vh",
 				height: "100vh",
-				backgroundColor: getBG({ defaultColor: "gray" }).secondary,
+				backgroundColor: getTheme().secondary.backgroundColor,
 			}}
 		>
 			<Navbar />

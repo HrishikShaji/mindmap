@@ -4,6 +4,7 @@ import { useNodeEdgeContext } from "../context/NodeEdgeContext";
 import {
 	Connection,
 	Edge,
+	EdgeTypes,
 	NodeTypes,
 	addEdge,
 	updateEdge,
@@ -13,12 +14,17 @@ import { getRandomGraphData } from "../lib/data";
 import StartNode from "../components/StartNode";
 import EndNode from "../components/EndNode";
 import CustomNode from "../components/CustomNode";
+import CustomEdge from "../components/CustomEdge";
 
 const nodeTypes: NodeTypes = {
 	custom: CustomNode,
 	start: StartNode,
 	end: EndNode,
 };
+
+const edgeTypes: EdgeTypes = {
+	custom: CustomEdge
+}
 
 let id = 25;
 const getId = () => `${id++}`;
@@ -100,5 +106,6 @@ export const useFlow = () => {
 		onConnectStart,
 		onEdgeUpdate,
 		nodeTypes,
+		edgeTypes
 	};
 };

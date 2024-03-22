@@ -28,7 +28,7 @@ export const Modal = () => {
 	const { nodes } = useNodeEdgeContext();
 	const [currentNode, setCurrentNode] = useState<Node | null>(null);
 	const { isEdit, state, setState } = useEdit();
-	const { getTextColor, getBG } = useTheme();
+	const { getTheme } = useTheme();
 	useEffect(() => {
 		const currentNode = nodes.filter((item) => item.id === id);
 		if (currentNode[0]) {
@@ -41,8 +41,8 @@ export const Modal = () => {
 			<div
 				className="p-10  relative flex flex-col items-center justify-center gap-10 rounded-3xl"
 				style={{
-					backgroundColor: getBG({ defaultColor: "gray" }).secondary,
-					color: getTextColor(),
+					backgroundColor: getTheme().secondary.backgroundColor,
+					color: getTheme().secondary.textColor,
 				}}
 			>
 				<button
@@ -51,7 +51,9 @@ export const Modal = () => {
 						setState("");
 					}}
 					className="absolute top-2 right-2 "
-					style={{ color: getTextColor() }}
+					style={{
+						color: getTheme().button.backgroundColor,
+					}}
 				>
 					<IoMdCloseCircle size={22} />
 				</button>

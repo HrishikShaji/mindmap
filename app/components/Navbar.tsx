@@ -2,12 +2,12 @@
 import { useTheme } from "../context/ThemeContext";
 
 export const Navbar = () => {
-	const { setTheme, getBG, getTextColor } = useTheme();
+	const { setTheme, getTheme } = useTheme();
 	return (
 		<div
 			style={{
-				backgroundColor: getBG({ defaultColor: "white" }).primary,
-				color: getTextColor(),
+				backgroundColor: getTheme().primary.backgroundColor,
+				color: getTheme().primary.textColor,
 			}}
 			className=" w-full fixed top-0 left-0 py-2 px-5 flex justify-between"
 		>

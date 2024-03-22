@@ -4,6 +4,7 @@ import ReactFlow, { ReactFlowProvider } from "reactflow";
 import "reactflow/dist/style.css";
 import { useFlow } from "../hooks/useFlow";
 import { useTheme } from "../context/ThemeContext";
+import { ConnectionLine } from "./ConnectionLine";
 
 function Flow() {
 	const {
@@ -17,9 +18,10 @@ function Flow() {
 		edges,
 		nodes,
 		nodeTypes,
+		edgeTypes,
 	} = useFlow();
 
-	const { getBG } = useTheme();
+	const { getTheme } = useTheme();
 
 	return (
 		<div
@@ -28,7 +30,7 @@ function Flow() {
 			style={{
 				width: "96vw",
 				height: "90vh",
-				backgroundColor: getBG({ defaultColor: "white" }).ternary,
+				backgroundColor: getTheme().ternary.backgroundColor,
 			}}
 		>
 			<ReactFlow
@@ -38,8 +40,10 @@ function Flow() {
 				onNodesChange={onNodesChange}
 				onEdgesChange={onEdgesChange}
 				nodeTypes={nodeTypes}
+				edgeTypes={edgeTypes}
 				nodes={nodes}
 				edges={edges}
+				connectionLineComponent={ConnectionLine}
 				onEdgeUpdate={onEdgeUpdate}
 				onConnect={onConnect}
 			/>

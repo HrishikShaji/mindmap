@@ -7,24 +7,33 @@ import { useTheme } from "../context/ThemeContext";
 
 export const DisconnectNodes = () => {
 	const { edges, disconnectNodes, setSelectedItems } = useDisconnectNodes();
-	const { getBG, getTextColor } = useTheme();
+	const { getTheme } = useTheme();
 
 	return (
 		<div className="flex flex-col gap-5">
-			<div className="grid grid-cols-1 h-[300px] overflow-y-scroll pr-2   gap-2 ">
+			<h1
+				className=" border-b-2  font-semibold pb-3"
+				style={{
+					color: getTheme().primary.textColor,
+					borderColor: getTheme().primary.textColor,
+				}}
+			>
+				DISCONNECT NODES
+			</h1>
+			<div className="custom-scrollbar grid grid-cols-1 h-[300px] overflow-y-scroll pr-2   gap-2 ">
 				{edges.map((edge, i) => (
 					<div
 						key={i}
 						className="flex justify-between items-center p-1 gap-5 rounded-3xl"
 						style={{
-							backgroundColor: getBG({ defaultColor: "white" }).primary,
+							backgroundColor: getTheme().primary.backgroundColor,
 						}}
 					>
 						<div className="flex items-center gap-4 text-sm">
 							<div
 								className="h-6 w-6 rounded-full flex items-center justify-center"
 								style={{
-									backgroundColor: getBG({ defaultColor: "gray" }).secondary,
+									backgroundColor: getTheme().secondary.backgroundColor,
 								}}
 							>
 								{edge.source}
@@ -33,7 +42,7 @@ export const DisconnectNodes = () => {
 							<div
 								className="h-6 w-6 rounded-full flex items-center justify-center"
 								style={{
-									backgroundColor: getBG({ defaultColor: "gray" }).secondary,
+									backgroundColor: getTheme().secondary.backgroundColor,
 								}}
 							>
 								{edge.target}
@@ -50,7 +59,10 @@ export const DisconnectNodes = () => {
 			<button
 				className="p-2 rounded-3xl "
 				onClick={disconnectNodes}
-				style={{ backgroundColor: getBG({ defaultColor: "white" }).primary }}
+				style={{
+					backgroundColor: getTheme().button.backgroundColor,
+					color: getTheme().button.textColor,
+				}}
 			>
 				Disconnect
 			</button>

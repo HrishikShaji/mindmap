@@ -7,7 +7,7 @@ import { useTheme } from "../context/ThemeContext";
 
 export const AddNode = () => {
 	const { addNode, data, handleChange } = useAddNode();
-	const { getBG, getTextColor } = useTheme();
+	const { getTheme } = useTheme();
 
 	const inputs = [
 		{
@@ -44,20 +44,34 @@ export const AddNode = () => {
 
 	return (
 		<form onSubmit={addNode} className="flex flex-col gap-10 sm:gap-4">
+			<h1
+				className=" border-b-2  font-semibold pb-3"
+				style={{
+					color: getTheme().primary.textColor,
+					borderColor: getTheme().primary.textColor,
+				}}
+			>
+				ADD NODE
+			</h1>
 			<div className="flex flex-col gap-2">
 				{inputs.map((input, i) => (
 					<div
 						className="sm:grid  sm:grid-cols-2 flex flex-col items-center  sm:gap-10"
 						key={i}
 					>
-						<label className=" ">{input.label}</label>
+						<label
+							style={{ color: getTheme().secondary.textColor }}
+							className=" text-sm"
+						>
+							{input.label}
+						</label>
 						<input
 							{...input}
 							onChange={handleChange}
 							className="py-1 px-3 w-full rounded-3xl focus:outline-none text-sm"
 							style={{
-								backgroundColor: getBG({ defaultColor: "white" }).primary,
-								color: getTextColor(),
+								backgroundColor: getTheme().primary.backgroundColor,
+								color: getTheme().primary.textColor,
 							}}
 						/>
 					</div>
@@ -65,13 +79,13 @@ export const AddNode = () => {
 			</div>
 			<button
 				style={{
-					backgroundColor: getBG({ defaultColor: "white" }).primary,
-					color: getTextColor(),
+					backgroundColor: getTheme().button.backgroundColor,
+					color: getTheme().button.textColor,
 				}}
-				className=" py-1 px-3 rounded-3xl"
+				className="text-sm font-semibold py-2 px-3 rounded-3xl"
 				type="submit"
 			>
-				Add
+				SUBMIT
 			</button>
 		</form>
 	);
