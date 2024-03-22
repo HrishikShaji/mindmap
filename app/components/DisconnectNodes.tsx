@@ -11,18 +11,18 @@ export const DisconnectNodes = () => {
 
 	return (
 		<div className="flex flex-col gap-5">
-			<div className="grid grid-cols-1 h-40 sm:h-full overflow-scroll sm:overflow-visible sm:grid-cols-5 bg-white sm:bg-transparent rounded-3xl sm:rounded-none    sm:gap-4">
+			<div className="grid grid-cols-1 h-[300px] overflow-y-scroll pr-2   gap-2 ">
 				{edges.map((edge, i) => (
 					<div
 						key={i}
-						className="flex justify-between items-center sm:p-1 px-3 py-1 sm:gap-4 sm:rounded-3xl "
+						className="flex justify-between items-center p-1 gap-5 rounded-3xl"
 						style={{
 							backgroundColor: getBG({ defaultColor: "white" }).primary,
 						}}
 					>
-						<div className="flex items-center gap-1 text-xs">
+						<div className="flex items-center gap-4 text-sm">
 							<div
-								className="sm:h-6 sm:w-6 sm:rounded-full flex items-center justify-center"
+								className="h-6 w-6 rounded-full flex items-center justify-center"
 								style={{
 									backgroundColor: getBG({ defaultColor: "gray" }).secondary,
 								}}
@@ -31,7 +31,7 @@ export const DisconnectNodes = () => {
 							</div>
 							<h1>---</h1>
 							<div
-								className="sm:h-6 sm:w-6 sm:rounded-full flex items-center justify-center"
+								className="h-6 w-6 rounded-full flex items-center justify-center"
 								style={{
 									backgroundColor: getBG({ defaultColor: "gray" }).secondary,
 								}}

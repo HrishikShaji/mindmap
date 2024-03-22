@@ -21,17 +21,17 @@ export const ConnectNodes = () => {
 				<div className="flex flex-col gap-4">
 					<h1>Select Targets</h1>
 
-					<div className="grid grid-cols-1 h-40 sm:h-full overflow-scroll sm:overflow-visible sm:grid-cols-5 bg-white sm:bg-transparent rounded-3xl sm:rounded-none    sm:gap-4">
+					<div className="grid grid-cols-1 h-[300px] overflow-y-scroll pr-2   gap-2 ">
 						{nodes.map((node, i) => (
 							<div
 								key={i}
-								className="flex justify-between items-center sm:p-1 px-3 py-1  sm:rounded-3xl "
+								className="flex justify-between items-center p-1  rounded-3xl"
 								style={{
 									backgroundColor: getBG({ defaultColor: "white" }).primary,
 								}}
 							>
 								<h1
-									className="sm:w-6 text-xs flex justify-center items-center sm:h-6  sm:rounded-full "
+									className=" w-6 text-xs flex justify-center items-center h-6 rounded-full "
 									style={{
 										backgroundColor: getBG({ defaultColor: "gray" }).secondary,
 									}}
