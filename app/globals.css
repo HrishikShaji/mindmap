@@ -30,5 +30,5 @@
 
 ::-webkit-scrollbar-thumb {
   background: #14b8a6;
-  border-radius: 25px;
+  border-radius: 0 25px 25px 0;
 }
