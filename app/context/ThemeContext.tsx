@@ -24,6 +24,7 @@ type ThemeData = {
 	setTheme: Dispatch<SetStateAction<Theme>>;
 	getBG: ({ defaultColor }: GetBGParams) => ThemeColors;
 	getTextColor: () => string;
+	theme: Theme;
 };
 
 const ThemeContext = createContext<ThemeData | undefined>(undefined);
@@ -88,6 +89,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
 		setTheme,
 		getBG,
 		getTextColor,
+		theme,
 	};
 
 	return (
