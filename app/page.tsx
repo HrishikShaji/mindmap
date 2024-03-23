@@ -5,35 +5,34 @@ import { ModalProvider } from "./context/ModalContext";
 import { Modal } from "./components/Modal";
 import { EditProvider } from "./context/EditContext";
 import { initialEdges, initialNodes } from "./lib/data";
-import { Node } from "reactflow";
 import { Navbar } from "./components/Navbar";
-import { ThemeProvider, useTheme } from "./context/ThemeContext";
+import { useTheme } from "./context/ThemeContext";
 
 export default function Home() {
-	const { getTheme, theme } = useTheme();
-	return (
-		<main
-			className={theme}
-			style={{
-				paddingRight: "2vw",
-				paddingLeft: "2vw",
-				paddingTop: "7vh",
-				height: "100vh",
-				backgroundColor: getTheme().secondary.backgroundColor,
-			}}
-		>
-			<Navbar />
-			<EditProvider>
-				<ModalProvider>
-					<NodeEdgeProvider
-						initialEdges={initialEdges}
-						initialNodes={initialNodes as Node[]}
-					>
-						<Modal />
-						<MindMap />
-					</NodeEdgeProvider>
-				</ModalProvider>
-			</EditProvider>
-		</main>
-	);
+  const { getTheme, theme } = useTheme();
+  return (
+    <main
+      className={theme}
+      style={{
+        paddingRight: "2vw",
+        paddingLeft: "2vw",
+        paddingTop: "7vh",
+        height: "100vh",
+        backgroundColor: getTheme().secondary.backgroundColor,
+      }}
+    >
+      <Navbar />
+      <EditProvider>
+        <ModalProvider>
+          <NodeEdgeProvider
+            initialEdges={initialEdges}
+            initialNodes={initialNodes}
+          >
+            <Modal />
+            <MindMap />
+          </NodeEdgeProvider>
+        </ModalProvider>
+      </EditProvider>
+    </main>
+  );
 }

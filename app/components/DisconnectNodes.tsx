@@ -6,7 +6,8 @@ import { useDisconnectNodes } from "../hooks/useDisconnectNodes";
 import { useTheme } from "../context/ThemeContext";
 
 export const DisconnectNodes = () => {
-	const { edges, disconnectNodes, setSelectedItems } = useDisconnectNodes();
+	const { currentEdges, disconnectNodes, setSelectedItems } =
+		useDisconnectNodes();
 	const { getTheme } = useTheme();
 
 	return (
@@ -21,7 +22,7 @@ export const DisconnectNodes = () => {
 				DISCONNECT NODES
 			</h1>
 			<div className="custom-scrollbar grid grid-cols-1 h-[300px] overflow-y-scroll pr-2   gap-2 ">
-				{edges.map((edge, i) => (
+				{currentEdges.map((edge, i) => (
 					<div
 						key={i}
 						className="flex justify-between items-center p-1 gap-5 rounded-3xl"

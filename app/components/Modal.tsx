@@ -9,8 +9,8 @@ import { DeleteNode } from "./DeleteNode";
 import { ConnectNodes } from "./ConnectNodes";
 import { DisconnectNodes } from "./DisconnectNodes";
 import { EditNode } from "./EditNode";
-import { Node } from "../lib/types";
 import { useTheme } from "../context/ThemeContext";
+import { Node } from "reactflow";
 
 type LookupType = {
 	[key: string]: ReactNode;
@@ -32,7 +32,7 @@ export const Modal = () => {
 	useEffect(() => {
 		const currentNode = nodes.filter((item) => item.id === id);
 		if (currentNode[0]) {
-			setCurrentNode(currentNode[0] as Node);
+			setCurrentNode(currentNode[0]);
 		}
 	}, [id, nodes]);
 	if (!isOpen) return null;

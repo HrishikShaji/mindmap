@@ -23,8 +23,8 @@ const nodeTypes: NodeTypes = {
 };
 
 const edgeTypes: EdgeTypes = {
-	custom: CustomEdge
-}
+	custom: CustomEdge,
+};
 
 let id = 25;
 const getId = () => `${id++}`;
@@ -44,7 +44,9 @@ export const useFlow = () => {
 	const onConnect = useCallback(
 		(params: Edge | Connection) => {
 			if (isEdit) {
-				setEdges((els) => addEdge(params, els));
+				setEdges((els) =>
+					addEdge({ animated: true, type: "custom", ...params }, els),
+				);
 			}
 		},
 		[isEdit, setEdges],
@@ -56,44 +58,6 @@ export const useFlow = () => {
 		},
 		[],
 	);
-	const onConnectEnd = useCallback(
-		(event: MouseEvent) => {
-			if (!isEdit) return;
-			if (!connectingNodeId.current) return;
-
-			const targetIsPane = (event.target as HTMLElement).classList.contains(
-				"react-flow__pane",
-			);
-
-			if (targetIsPane) {
-				const id = getId();
-				const newNode = {
-					id,
-					position: screenToFlowPosition({
-						x: event.clientX,
-						y: event.clientY,
-					}),
-					data: {
-						label: `Node ${id}`,
-						id: id,
-						graphData: getRandomGraphData(),
-					},
-					origin: [0.5, 0.0],
-					type: "custom",
-				};
-
-				setNodes((nds) => nds.concat(newNode));
-				setEdges((eds) =>
-					eds.concat({
-						id,
-						source: connectingNodeId.current,
-						target: id,
-					} as Edge),
-				);
-			}
-		},
-		[screenToFlowPosition, isEdit, setEdges, setNodes],
-	);
 
 	return {
 		nodes,
@@ -102,10 +66,9 @@ export const useFlow = () => {
 		onEdgesChange,
 		reactFlowWrapper,
 		onConnect,
-		onConnectEnd,
 		onConnectStart,
 		onEdgeUpdate,
 		nodeTypes,
-		edgeTypes
+		edgeTypes,
 	};
 };

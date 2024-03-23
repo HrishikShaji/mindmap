@@ -23,7 +23,7 @@ export default function CustomEdge({
 		<>
 			<BaseEdge
 				path={edgePath}
-				style={{ stroke: getTheme().primary.textColor, strokeWidth: 1 }}
+				style={{ stroke: getTheme().primary.textColor, strokeWidth: 2 }}
 			/>
 
 			<circle

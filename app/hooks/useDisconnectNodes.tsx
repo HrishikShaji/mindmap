@@ -1,21 +1,28 @@
 import { useState } from "react";
 import { useNodeEdgeContext } from "../context/NodeEdgeContext";
 import { EdgeOption } from "../lib/types";
+import { Edge } from "reactflow";
 
 export const useDisconnectNodes = () => {
-  const { setEdges, edges } = useNodeEdgeContext();
-  const [selectedItems, setSelectedItems] = useState<EdgeOption[]>([]);
+	const { setEdges, edges, nodes } = useNodeEdgeContext();
+	const [selectedItems, setSelectedItems] = useState<EdgeOption[]>([]);
 
-  function disconnectNodes() {
-    const newEdges = edges.filter(
-      (edge) =>
-        !selectedItems.some(
-          (item) => item.source === edge.source && item.target === edge.target,
-        ),
-    );
+	const currentEdges = edges.filter((edge) => {
+		const sourceNodeExists = nodes.find((node) => node.id === edge.source);
+		const targetNodeExists = nodes.find((node) => node.id === edge.target);
+		return sourceNodeExists && targetNodeExists;
+	});
 
-    setEdges(newEdges);
-  }
+	function disconnectNodes() {
+		const newEdges = currentEdges.filter(
+			(edge) =>
+				!selectedItems.some(
+					(item) => item.source === edge.source && item.target === edge.target,
+				),
+		);
 
-  return { disconnectNodes, edges, setSelectedItems };
+		setEdges(newEdges);
+	}
+
+	return { disconnectNodes, edges, setSelectedItems, currentEdges };
 };
