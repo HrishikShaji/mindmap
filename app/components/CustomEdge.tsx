@@ -1,14 +1,7 @@
-import {
-  BaseEdge,
-  EdgeProps,
-  Node,
-  getSimpleBezierPath,
-  useEdges,
-} from "reactflow";
+import { BaseEdge, EdgeProps, Node, getSimpleBezierPath } from "reactflow";
 import { useTheme } from "../context/ThemeContext";
 import { useEdit } from "../context/EditContext";
 import { useNodeEdgeContext } from "../context/NodeEdgeContext";
-import { NodeData, NodeType } from "../lib/types";
 
 export default function CustomEdge({
   sourceX,
@@ -47,8 +40,7 @@ export default function CustomEdge({
       <BaseEdge
         path={edgePath}
         style={{
-          stroke: getTheme(getColorFromSource({ nodes: nodes, source: source }))
-            .primary.textColor,
+          stroke: getTheme().primary.textColor,
           strokeWidth: 2,
         }}
       />

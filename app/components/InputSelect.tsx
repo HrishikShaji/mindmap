@@ -4,8 +4,8 @@ import {
 	IoIosArrowDropdownCircle,
 	IoIosArrowDropupCircle,
 } from "react-icons/io";
-import { NodeOption } from "../lib/types";
 import { useTheme } from "../context/ThemeContext";
+import { NodeOption } from "@/types/types";
 
 interface InputSelectProps {
 	item: NodeOption;
@@ -20,10 +20,12 @@ export const InputSelect: React.FC<InputSelectProps> = (props) => {
 	return (
 		<div className="flex flex-col w-full sm:w-[300px] gap-2 relative">
 			<div
-				className="flex rounded-3xl overflow-hidden  px-2 justify-between  z-0"
+				className="flex rounded-3xl p-1  overflow-hidden  pl-4 pr-2 justify-between  z-0"
 				style={{ backgroundColor: getTheme().primary.backgroundColor }}
 			>
-				<h1>{props.item.id === "" ? "Select" : props.item.label}</h1>
+				<h1 className="text-sm">
+					{props.item.id === "" ? "Select" : props.item.label}
+				</h1>
 				<button
 					className="p-1 focus:outline-none "
 					type="button"

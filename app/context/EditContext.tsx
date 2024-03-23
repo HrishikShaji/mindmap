@@ -15,12 +15,12 @@ export type EditState =
 	| "disconnectNodes"
 	| "";
 
-type EditData = {
+interface EditData {
 	isEdit: boolean;
 	state: EditState;
 	toggleEdit: () => void;
 	setState: Dispatch<SetStateAction<EditState>>;
-};
+}
 
 const EditContext = createContext<EditData | undefined>(undefined);
 

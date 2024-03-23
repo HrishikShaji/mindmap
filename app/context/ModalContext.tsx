@@ -1,12 +1,11 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
-type ModalData = {
+interface ModalData {
 	id: string;
 	isOpen: boolean;
 	openModal: (id?: string) => void;
 	closeModal: () => void;
-};
-
+}
 const ModalContext = createContext<ModalData | undefined>(undefined);
 
 export const useModal = () => {

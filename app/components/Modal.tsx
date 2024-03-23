@@ -11,6 +11,8 @@ import { DisconnectNodes } from "./DisconnectNodes";
 import { EditNode } from "./EditNode";
 import { useTheme } from "../context/ThemeContext";
 import { Node } from "reactflow";
+import { DataRow } from "./DataRow";
+import { DataContainer } from "./DataContainer";
 
 type LookupType = {
 	[key: string]: ReactNode;
@@ -41,8 +43,7 @@ export const Modal = () => {
 			<div
 				className="p-10  relative flex flex-col items-center justify-center gap-10 rounded-3xl"
 				style={{
-					backgroundColor: getTheme(currentNode?.data.color).secondary
-						.backgroundColor,
+					backgroundColor: getTheme().secondary.backgroundColor,
 					color: getTheme().secondary.textColor,
 				}}
 			>
@@ -60,32 +61,7 @@ export const Modal = () => {
 				</button>
 				{isEdit ? lookup[state] : null}
 				{!isEdit && state === "" && currentNode ? (
-					<div className="flex flex-col gap-4">
-
-						<BarChart graphData={currentNode?.data.graphData} />
-						<div className="flex flex-col gap-1">
-							<div className="grid grid-cols-2 gap-4">
-								<h1>Label</h1>
-								<h1>{currentNode.data.label}</h1>
-							</div>
-							<div className="grid grid-cols-2 gap-4">
-								<h1>Positive</h1>
-								<h1>{currentNode.data.graphData.positive}</h1>
-							</div>
-							<div className="grid grid-cols-2 gap-4">
-								<h1>Negative</h1>
-								<h1>{currentNode.data.graphData.negative}</h1>
-							</div>
-							<div className="grid grid-cols-2 gap-4">
-								<h1>Total</h1>
-								<h1>{currentNode.data.graphData.total}</h1>
-							</div>
-							<div className="grid grid-cols-2 gap-4">
-								<h1>Comments</h1>
-								<h1>{currentNode.data.graphData.comments}</h1>
-							</div>
-						</div>
-					</div>
+					<DataContainer node={currentNode} />
 				) : null}
 			</div>
 		</div>
