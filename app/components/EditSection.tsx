@@ -1,7 +1,6 @@
 import { MdEdit } from "react-icons/md";
 import { EditState, useEdit } from "../context/EditContext";
 import { useModal } from "../context/ModalContext";
-import { useTheme } from "../context/ThemeContext";
 
 const buttons = [
 	{
@@ -26,7 +25,6 @@ export const EditSection = () => {
 	const { openModal } = useModal();
 	const { isEdit, toggleEdit, setState } = useEdit();
 	const { closeModal, isOpen } = useModal();
-	const { getTheme } = useTheme();
 	function toggleEditSection() {
 		toggleEdit();
 		setState("");
@@ -39,7 +37,7 @@ export const EditSection = () => {
 		<div className=" relative flex items-center">
 			<div
 				onClick={toggleEditSection}
-				className="absolute cursor-pointer z-20 top-5 left-5 rounded-full border-2 border-black p-2 bg-teal-500 text-black  "
+				className="absolute cursor-pointer z-20 top-5 hover:bg-teal-300 left-5 rounded-full border-2 border-black p-2 bg-teal-500 text-black  "
 			>
 				<MdEdit />
 			</div>
@@ -52,11 +50,7 @@ export const EditSection = () => {
 								setState(button.value as EditState);
 								openModal();
 							}}
-							className="px-3 py-1 text-sm rounded-3xl "
-							style={{
-								backgroundColor: getTheme().primary.backgroundColor,
-								color: getTheme().primary.textColor,
-							}}
+							className="px-3 py-1 bg-teal-500 text-black hover:bg-teal-300 text-sm rounded-3xl "
 						>
 							{button.label}
 						</button>

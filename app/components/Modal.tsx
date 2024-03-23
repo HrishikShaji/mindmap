@@ -3,7 +3,6 @@ import { ReactNode, useEffect, useState } from "react";
 import { useModal } from "../context/ModalContext";
 import { useNodeEdgeContext } from "../context/NodeEdgeContext";
 import { useEdit } from "../context/EditContext";
-import { BarChart } from "./BarChart";
 import { AddNode } from "./AddNode";
 import { DeleteNode } from "./DeleteNode";
 import { ConnectNodes } from "./ConnectNodes";
@@ -11,7 +10,6 @@ import { DisconnectNodes } from "./DisconnectNodes";
 import { EditNode } from "./EditNode";
 import { useTheme } from "../context/ThemeContext";
 import { Node } from "reactflow";
-import { DataRow } from "./DataRow";
 import { DataContainer } from "./DataContainer";
 
 type LookupType = {

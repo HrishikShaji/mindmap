@@ -9,6 +9,7 @@ type InitialFormData = {
 	name: string;
 	value: string | number;
 	placeholder: string;
+	type: string;
 };
 
 interface InputFormProps {

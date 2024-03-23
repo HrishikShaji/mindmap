@@ -3,7 +3,7 @@ import { Handle, Position } from "reactflow";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { useCustomNode } from "../hooks/useCustomNode";
 import { useTheme } from "../context/ThemeContext";
-import { NodeData } from "../lib/types";
+import { NodeData } from "@/types/types";
 
 interface NodeProps {
 	data: NodeData;
@@ -21,7 +21,7 @@ function CustomNode({ data }: NodeProps) {
 				backgroundColor: getTheme(data.color).primary.backgroundColor,
 				color: getTheme().primary.textColor,
 			}}
-			className="w-[260px]    flex h-10 px-1  relative shadow-md rounded-3xl  "
+			className="w-[260px]  hover:bg-teal-500 hover:text-black  flex h-10 px-1  relative shadow-md rounded-3xl  "
 		>
 			<div
 				className="flex   items-center w-full "
@@ -45,10 +45,10 @@ function CustomNode({ data }: NodeProps) {
 							backgroundColor: getTheme().ternary.backgroundColor,
 							color: getTheme().ternary.textColor,
 						}}
-						className="flex gap-1  p-1 rounded-3xl  "
+						className="flex gap-1 hover:bg-teal-500 hover:text-black p-1 rounded-3xl  "
 					>
 						<button
-							className="p-1 rounded-full "
+							className="p-1 rounded-full  hover:bg-white hover:text-teal-500"
 							onClick={() => deleteNode()}
 							style={{
 								backgroundColor: getTheme(data.color).primary.backgroundColor,
@@ -58,7 +58,7 @@ function CustomNode({ data }: NodeProps) {
 							<MdDelete />
 						</button>
 						<button
-							className="p-1 rounded-full  "
+							className="p-1 rounded-full  hover:bg-white hover:text-teal-500"
 							onClick={toggleEdit}
 							style={{
 								backgroundColor: getTheme(data.color).primary.backgroundColor,

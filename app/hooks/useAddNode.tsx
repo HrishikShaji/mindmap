@@ -7,6 +7,7 @@ const initialData = {
 	negative: 0,
 	total: 0,
 	comments: 0,
+	color: "",
 };
 
 export const useAddNode = () => {
@@ -21,9 +22,10 @@ export const useAddNode = () => {
 				...prevNodes,
 				{
 					id: (prevNodes.length + 1).toString(),
-					position: { x: 0, y: 0 },
+					position: { x: 20, y: 100 },
 					data: {
 						label: data.label,
+						color: data.color,
 						id: (prevNodes.length + 1).toString(),
 						graphData: {
 							positive: data.positive,

@@ -26,7 +26,12 @@ export const ConnectNodes = () => {
 			<FormHeading>CONNECT NODES</FormHeading>
 			<div className="flex flex-col gap-4">
 				<SecondaryHeading>Select Source</SecondaryHeading>
-				<InputSelect item={option} options={options} onChange={setOption} />
+				<InputSelect
+					none={true}
+					item={option}
+					options={options}
+					onChange={setOption}
+				/>
 			</div>
 			<div className="flex flex-col gap-4">
 				<SecondaryHeading>Select Targets</SecondaryHeading>

@@ -25,32 +25,10 @@
 
 .custom-scrollbar::-webkit-scrollbar-track {
   border-radius: 25px;
+  background-color: #14b8a6;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background-color: white;
   border-radius: 25px;
-}
-
-main.dark .custom-scrollbar::-webkit-scrollbar-track {
-  background: white;
-}
-
-main.dark .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: black;
-}
-
-main.light .custom-scrollbar::-webkit-scrollbar-track {
-  background: black;
-}
-main.light .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: white;
-}
-
-main.default .custom-scrollbar::-webkit-scrollbar-track {
-  background: blue;
-}
-
-main.default .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: gray;
 }

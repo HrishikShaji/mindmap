@@ -9,7 +9,7 @@ import React, {
 	SetStateAction,
 } from "react";
 
-type Theme = "dark" | "light" | "default";
+export type Theme = "dark" | "light" | "default";
 
 type ThemeItem = {
 	backgroundColor: string;
@@ -44,11 +44,11 @@ type ThemeProviderProps = {
 };
 
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-	const [theme, setTheme] = useState<Theme>("dark");
+	const [theme, setTheme] = useState<Theme>("default");
 
 	const darkTheme: ThemeColors = {
 		primary: { backgroundColor: "black", textColor: "#14b8a6" },
-		secondary: { backgroundColor: "#171717", textColor: "white" },
+		secondary: { backgroundColor: "#404040", textColor: "white" },
 		ternary: { backgroundColor: "#262626", textColor: "#9ca3af" },
 		button: { backgroundColor: "#14b8a6", textColor: "black" },
 	};
