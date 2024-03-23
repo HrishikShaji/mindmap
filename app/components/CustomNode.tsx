@@ -77,6 +77,7 @@ function CustomNode({ data }: NodeProps) {
 					height: isEdit ? "8px" : "0px",
 					width: isEdit ? "8px" : "0px",
 					borderWidth: isEdit ? "1px" : "0px",
+					backgroundColor: isEdit ? "teal" : "transparent",
 				}}
 				position={Position.Left}
 				onConnect={(params) => console.log("handle onConnect", params)}
@@ -84,7 +85,7 @@ function CustomNode({ data }: NodeProps) {
 			>
 				<span
 					style={{ backgroundColor: isEdit ? "teal" : "transparent" }}
-					className="animate-ping absolute pointer-events-none inline-flex h-full w-full rounded-full  opacity-75"
+					className="animate-ping  absolute pointer-events-none inline-flex h-full w-full rounded-full  opacity-75"
 				></span>
 			</Handle>
 			<Handle
@@ -92,6 +93,7 @@ function CustomNode({ data }: NodeProps) {
 					height: isEdit ? "8px" : "0px",
 					width: isEdit ? "8px" : "0px",
 					borderWidth: isEdit ? "1px" : "0px",
+					backgroundColor: isEdit ? "teal" : "transparent",
 				}}
 				type="source"
 				position={Position.Right}

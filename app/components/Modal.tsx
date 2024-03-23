@@ -41,7 +41,8 @@ export const Modal = () => {
 			<div
 				className="p-10  relative flex flex-col items-center justify-center gap-10 rounded-3xl"
 				style={{
-					backgroundColor: getTheme().secondary.backgroundColor,
+					backgroundColor: getTheme(currentNode?.data.color).secondary
+						.backgroundColor,
 					color: getTheme().secondary.textColor,
 				}}
 			>
@@ -60,6 +61,7 @@ export const Modal = () => {
 				{isEdit ? lookup[state] : null}
 				{!isEdit && state === "" && currentNode ? (
 					<div className="flex flex-col gap-4">
+
 						<BarChart graphData={currentNode?.data.graphData} />
 						<div className="flex flex-col gap-1">
 							<div className="grid grid-cols-2 gap-4">
