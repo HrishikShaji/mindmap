@@ -1,42 +1,27 @@
 import { FormEvent, useEffect, useState } from "react";
 import { useNodeEdgeContext } from "../context/NodeEdgeContext";
-import { Node, NodeOption } from "../lib/types";
+import { NodeOption } from "../lib/types";
+import { Node } from "reactflow";
 
 export const useConnectNodes = () => {
 	const { setEdges, nodes, edges } = useNodeEdgeContext();
 	const [targets, setTargets] = useState<string[]>([]);
 	const [reset, setReset] = useState(false);
-	const [newNodes, setNewNodes] = useState<Node[]>(nodes as Node[]);
+	const [newNodes, setNewNodes] = useState<Node[]>(nodes);
 	const options = nodes.map((item) => {
 		return { label: item.data.label, id: item.id };
 	});
 	const [option, setOption] = useState<NodeOption>({ label: "", id: "" });
 
 	useEffect(() => {
-		const edgesToRemove = edges.filter(
-			(edge) =>
-				edge.source === option.id ||
-				(edge.sourceNode && edge.sourceNode.id === option.id),
+		const connectedEdges = edges.filter((edge) => edge.source === option.id);
+		const connectedNodeIds = connectedEdges.map((edge) => edge.target);
+		const filteredNodes = nodes.filter(
+			(node) => !connectedNodeIds.includes(node.id),
 		);
-		const nodesToRemove = edgesToRemove.map((edge) => edge.target);
-
-		const remainingNodes = nodes.filter(
-			(node) => !nodesToRemove.includes(node.id),
-		);
-		const remainingEdges = edges.filter(
-			(edge) => !edgesToRemove.includes(edge),
-		);
-
-		setNewNodes(remainingNodes);
-		setEdges(remainingEdges);
-	}, [option.id, option.label, nodes, edges]);
-	useEffect(() => {
-		const currentNodes = nodes.filter((node) => node.id !== option.id);
-		const edgesWithoutSelectedSourceAsSource = edges.filter(
-			(edge) => edge.source !== option.id && edge.sourceNode?.id !== option.id,
-		);
-		setNewNodes(currentNodes);
-	}, [option.id, option.label, nodes]);
+		const newNodes = filteredNodes.filter((node) => node.id !== option.id);
+		setNewNodes(newNodes);
+	}, [option.id, option.label]);
 
 	function connectNodes(e: FormEvent) {
 		e.preventDefault();
@@ -46,6 +31,8 @@ export const useConnectNodes = () => {
 					id: `e${option.id}-${target}`,
 					source: option.id,
 					target: target,
+					animated: true,
+					type: "custom",
 				};
 			});
 

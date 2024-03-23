@@ -72,18 +72,38 @@ function CustomNode({ data }: NodeProps) {
 			</div>
 			<Handle
 				type="target"
+				className="relative! "
+				style={{
+					height: isEdit ? "8px" : "0px",
+					width: isEdit ? "8px" : "0px",
+					borderWidth: isEdit ? "1px" : "0px",
+				}}
 				position={Position.Left}
-				className="w-2 h-2 !bg-teal-500 "
-				onConnect={(params) => console.log('handle onConnect', params)}
-				isConnectable={true}
-			/>
+				onConnect={(params) => console.log("handle onConnect", params)}
+				isConnectable={isEdit}
+			>
+				<span
+					style={{ backgroundColor: isEdit ? "teal" : "transparent" }}
+					className="animate-ping absolute pointer-events-none inline-flex h-full w-full rounded-full  opacity-75"
+				></span>
+			</Handle>
 			<Handle
+				style={{
+					height: isEdit ? "8px" : "0px",
+					width: isEdit ? "8px" : "0px",
+					borderWidth: isEdit ? "1px" : "0px",
+				}}
 				type="source"
 				position={Position.Right}
-				className="w-2 h-2 !bg-teal-500"
-				isConnectable={true}
-				onConnect={(params) => console.log('handle onConnect', params)}
-			/>
+				className="relative! h-2 w-2"
+				isConnectable={isEdit}
+				onConnect={(params) => console.log("handle onConnect", params)}
+			>
+				<span
+					style={{ backgroundColor: isEdit ? "teal" : "transparent" }}
+					className="animate-ping absolute pointer-events-none inline-flex h-full w-full rounded-full  opacity-75"
+				></span>
+			</Handle>
 		</div>
 	);
 }

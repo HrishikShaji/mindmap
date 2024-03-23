@@ -1,5 +1,6 @@
-import { BaseEdge, EdgeProps, getSimpleBezierPath } from "reactflow";
+import { BaseEdge, EdgeProps, getSimpleBezierPath, useEdges } from "reactflow";
 import { useTheme } from "../context/ThemeContext";
+import { useEdit } from "../context/EditContext";
 
 export default function CustomEdge({
 	sourceX,
@@ -10,6 +11,7 @@ export default function CustomEdge({
 	targetPosition,
 }: EdgeProps) {
 	const { getTheme } = useTheme();
+	const { isEdit } = useEdit();
 	const [edgePath] = getSimpleBezierPath({
 		sourceX,
 		sourceY,
@@ -26,16 +28,18 @@ export default function CustomEdge({
 				style={{ stroke: getTheme().primary.textColor, strokeWidth: 2 }}
 			/>
 
-			<circle
-				style={{
-					filter: `drop-shadow(3px 3px 5px ${"10px"}`,
-				}}
-				r="4"
-				fill={getTheme().primary.textColor}
-				className="circle"
-			>
-				<animateMotion dur="3s" repeatCount="indefinite" path={edgePath} />
-			</circle>
+			{!isEdit && (
+				<circle
+					style={{
+						filter: `drop-shadow(3px 3px 5px ${"10px"}`,
+					}}
+					r="4"
+					fill={getTheme().primary.textColor}
+					className="circle"
+				>
+					<animateMotion dur="3s" repeatCount="indefinite" path={edgePath} />
+				</circle>
+			)}
 		</>
 	);
 }
